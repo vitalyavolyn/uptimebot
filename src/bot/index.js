@@ -82,7 +82,7 @@ updates.on('message', async (ctx, next) => {
   } else await next()
 })
 
-// в беседах работает только одна вещь - подключение репозиториев
+// в беседах работает только одна вещь - подключение серверов
 updates.on('message', async (ctx, next) => {
   if (ctx.isChat) {
     if (/[A-Z0-9]{5}$/.test(ctx.text)) {
