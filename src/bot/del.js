@@ -9,7 +9,7 @@ export async function commandHandler (ctx) {
     .take(19)
     .map(e =>
       Keyboard.textButton({
-        label: e.url.toString(),
+        label: e.url,
         color: e.to > 2e9 ? Keyboard.PRIMARY_COLOR : Keyboard.DEFAULT_COLOR,
         payload: {
           id: e.id

@@ -10,12 +10,12 @@ sugar.Date.setLocale('ru')
 export default async function (server) {
   let status
   if (server.type === 'http') {
-    status = await axios(server.url.toString()).then(() => true, () => false)
+    status = await axios(server.url, { timeout: 10 * 1000 }).then(() => true, () => false)
   } else if (server.type === 'ping') {
-    let p = await ping.promise.probe(server.url.toString().split('//')[1]) // убирает ping://
+    let p = await ping.promise.probe(server.url.split('//')[1]) // убирает ping://
     status = p.alive
   } else {
-    let [host, port] = server.url.toString().split('//')[1].split(':')
+    let [host, port] = server.url.split('//')[1].split(':')
     let check = await checkPortStatus(port, host)
     status = check === 'open'
   }

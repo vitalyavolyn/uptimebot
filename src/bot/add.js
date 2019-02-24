@@ -31,6 +31,8 @@ export async function middleware (ctx, next) {
       url = new URL(`${type}://${ctx.text}`)
     }
 
+    url = decodeURI(url.toString())
+
     await ctx.send({
       message: txt.add.chooseTarget,
       keyboard: Keyboard.keyboard([
