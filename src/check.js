@@ -7,10 +7,10 @@ import { checkPortStatus } from 'portscanner'
 
 sugar.Date.setLocale('ru')
 
-export default async function (server) {
+export default async function check (server, counter = 0) {
   let status
   if (server.type === 'http') {
-    status = await axios(server.url, { timeout: 10 * 1000 }).then(() => true, () => false)
+    status = await axios(server.url, { timeout: 15 * 1000 }).then(() => true, (...e) => { console.log(...e); return false })
   } else if (server.type === 'ping') {
     let p = await ping.promise.probe(server.url.split('//')[1]) // убирает ping://
     status = p.alive
@@ -19,6 +19,8 @@ export default async function (server) {
     let check = await checkPortStatus(port, host)
     status = check === 'open'
   }
+
+  if (!status && counter < 5) return check(server, counter + 1)
 
   server.lastCheck = new Date()
   if (typeof server.status !== 'boolean') {
