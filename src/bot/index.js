@@ -48,11 +48,6 @@ updates.on('message', async (ctx, next) => {
 })
 
 updates.on('message', async (ctx, next) => {
-  console.log(ctx)
-  next()
-})
-
-updates.on('message', async (ctx, next) => {
   if (ctx.state.command === 'cancel' || ctx.text === '/cancel') {
     ctx.clearSession()
 
