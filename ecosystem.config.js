@@ -7,6 +7,9 @@ module.exports = {
     instances: 1,
     autorestart: true,
     watch: false,
-    wait_ready: true
+    wait_ready: true,
+    env: {
+      PORT: 8001
+    }
   }]
 }

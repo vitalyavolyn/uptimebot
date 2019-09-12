@@ -13,8 +13,7 @@ import list from './list'
 const { updates } = vk
 const stateMachine = new Map()
 
-// вылавливаем всех неавторизованных
-// а также добавляем несколько вещей в контекст
+// добавляем несколько вещей в контекст
 updates.on('message', async (ctx, next) => {
   const { peerId } = ctx
 

@@ -6,14 +6,13 @@ import bot from './bot'
 import db from './db'
 import check from './check'
 
-const port = 8001
 const app = new Koa()
 
 app.context.db = db
 
 app.use(koaBody())
 app.use(bot)
-app.listen(port)
+app.listen(process.env.PORT || 8001)
 
 scheduleJob('*/3 * * * *', async function () {
   const servers = db.get('users').flatMap('servers')
