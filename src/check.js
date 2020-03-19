@@ -28,13 +28,15 @@ export default async function check (server, counter = 0) {
   } else if (server.status && !status) {
     vk.api.messages.send({
       message: `${server.url} недоступен!`,
-      peer_id: server.to
+      peer_id: server.to,
+      dont_parse_links: 1
     })
     server.since = new Date()
   } else if (!server.status && status) {
     vk.api.messages.send({
       message: `${server.url} снова доступен. Он был недоступен ${sugar.Date.relativeTo(new Date(), server.since)}`,
-      peer_id: server.to
+      peer_id: server.to,
+      dont_parse_links: 1
     })
     server.since = new Date()
   }
